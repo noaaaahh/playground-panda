@@ -1,18 +1,22 @@
 import { defineRecipe } from "@pandacss/dev";
 
 const generateColors = (varaints: string) => {
-  return {
-    "--colors-theme-text": `var(--text-${varaints})`,
-    "--colors-theme-text-alternative": `var(--text-${varaints}-alternative)`,
-    "--colors-theme-transparent-8": `var(--${varaints}-transparent-8)`,
-    "--colors-theme-transparent-16": `var(--${varaints}-transparent-16)`,
-    "--colors-theme-transparent-24": `var(--${varaints}-transparent-24)`,
-    "--colors-theme-transparent-32": `var(--${varaints}-transparent-32)`,
-    "--colors-theme-hover": `var(--${varaints}-hover)`,
-    "--colors-theme-active": `var(--${varaints}-active)`,
+  const foreground =
+    varaints === "secondary"
+      ? `colors.text-secondary-alternative`
+      : `colors.text-light`;
 
-    "--colors-theme-background": `var(--${varaints})`,
-    "--colors-theme-foreground": `colors.text-light`,
+  return {
+    "--colors-themes-text": `var(--text-${varaints})`,
+    "--colors-themes-text-alternative": `var(--text-${varaints}-alternative)`,
+    "--colors-themes-transparent-8": `var(--${varaints}-transparent-8)`,
+    "--colors-themes-transparent-16": `var(--${varaints}-transparent-16)`,
+    "--colors-themes-transparent-24": `var(--${varaints}-transparent-24)`,
+    "--colors-themes-transparent-32": `var(--${varaints}-transparent-32)`,
+    "--colors-themes-hover": `var(--${varaints}-hover)`,
+    "--colors-themes-active": `var(--${varaints}-active)`,
+    "--colors-themes-background": `var(--${varaints})`,
+    "--colors-themes-foreground": foreground,
   };
 };
 
@@ -46,10 +50,7 @@ export const buttonRecipe = defineRecipe({
     stretch: { true: { width: "100%" } },
     color: {
       primary: generateColors("primary"),
-      secondary: {
-        ...generateColors("secondary"),
-        "--colors-theme-foreground": "colors.text-secondary-alternative",
-      },
+      secondary: generateColors("secondary"),
       success: generateColors("success"),
       warning: generateColors("warning"),
       danger: generateColors("danger"),
@@ -58,31 +59,31 @@ export const buttonRecipe = defineRecipe({
     },
     shape: {
       fill: {
-        color: "theme-foreground",
-        backgroundColor: "theme-background",
+        color: "themes.foreground",
+        backgroundColor: "themes.background",
 
-        _hover: { backgroundColor: "theme-hover" },
-        _focusVisible: { backgroundColor: "theme-hover" },
-        _active: { backgroundColor: "theme-active" },
+        _hover: { backgroundColor: "themes.hover" },
+        _focusVisible: { backgroundColor: "themes.hover" },
+        _active: { backgroundColor: "themes.active" },
       },
       outline: {
-        color: "theme-text-alternative",
-        backgroundColor: "theme-transparent-8",
+        color: "themes.text-alternative",
+        backgroundColor: "themes.transparent-8",
         border: "0.0625rem solid",
-        borderColor: "theme-background",
+        borderColor: "themes.background",
 
-        _hover: { backgroundColor: "theme-transparent-16" },
-        _focus: { backgroundColor: "theme-transparent-16" },
-        _active: { backgroundColor: "theme-transparent-24" },
+        _hover: { backgroundColor: "themes.transparent-16" },
+        _focus: { backgroundColor: "themes.transparent-16" },
+        _active: { backgroundColor: "themes.transparent-24" },
       },
       invisible: {
-        color: "theme-text",
+        color: "themes.text",
         backgroundColor: "transparent",
 
         _hover: { backgroundColor: "gray-600-transparent-8" },
         _focus: { backgroundColor: "gray-600-transparent-8" },
         _active: {
-          color: "theme-text-alternative",
+          color: "themes.text-alternative",
           backgroundColor: "gray-600-transparent-16",
         },
       },
