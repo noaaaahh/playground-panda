@@ -710,13 +710,3 @@
   --spacer-lg: 1.5rem;
   --spacer-xl: 3rem;
 }
-
-:root {
-  --colors-color-palette-primary: "";
-  --colors-color-palette-primary-active: "";
-  --colors-color-palette-primary-hover: "";
-  --colors-color-palette-primary-transparent-8: "";
-  --colors-color-palette-primary-transparent-16: "";
-  --colors-color-palette-primary-transparent-24: "";
-  --colors-color-palette-primary-transparent-32: "";
-}

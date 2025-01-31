@@ -2,16 +2,17 @@ import { defineRecipe } from "@pandacss/dev";
 
 const generateColors = (varaints: string) => {
   return {
-    "--default-bg": `var(--${varaints})`,
-    "--default-fg": `colors.text-light`,
-    "--text": `var(--text-${varaints})`,
-    "--text-alternative": `var(--text-${varaints}-alternative)`,
-    "--transparent-8": `var(--${varaints}-transparent-8)`,
-    "--transparent-16": `var(--${varaints}-transparent-16)`,
-    "--transparent-24": `var(--${varaints}-transparent-24)`,
-    "--transparent-32": `var(--${varaints}-transparent-32)`,
-    "--hover": `var(--${varaints}-hover)`,
-    "--active": `var(--${varaints}-active)`,
+    "--colors-theme-text": `var(--text-${varaints})`,
+    "--colors-theme-text-alternative": `var(--text-${varaints}-alternative)`,
+    "--colors-theme-transparent-8": `var(--${varaints}-transparent-8)`,
+    "--colors-theme-transparent-16": `var(--${varaints}-transparent-16)`,
+    "--colors-theme-transparent-24": `var(--${varaints}-transparent-24)`,
+    "--colors-theme-transparent-32": `var(--${varaints}-transparent-32)`,
+    "--colors-theme-hover": `var(--${varaints}-hover)`,
+    "--colors-theme-active": `var(--${varaints}-active)`,
+
+    "--colors-theme-background": `var(--${varaints})`,
+    "--colors-theme-foreground": `colors.text-light`,
   };
 };
 
@@ -22,6 +23,7 @@ export const buttonRecipe = defineRecipe({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "300",
+    border: "none",
 
     _disabled: {
       pointerEvents: "none",
@@ -46,7 +48,7 @@ export const buttonRecipe = defineRecipe({
       primary: generateColors("primary"),
       secondary: {
         ...generateColors("secondary"),
-        "--default-fg": "colors.text-secondary-alternative",
+        "--colors-theme-foreground": "colors.text-secondary-alternative",
       },
       success: generateColors("success"),
       warning: generateColors("warning"),
@@ -56,32 +58,31 @@ export const buttonRecipe = defineRecipe({
     },
     shape: {
       fill: {
-        backgroundColor: "var(--default-bg)",
-        color: "var(--default-fg)",
-        border: "none",
+        color: "theme-foreground",
+        backgroundColor: "theme-background",
 
-        _hover: { backgroundColor: "var(--hover)" },
-        _focusVisible: { backgroundColor: "var(--hover)" },
-        _active: { backgroundColor: "var(--active)" },
+        _hover: { backgroundColor: "theme-hover" },
+        _focusVisible: { backgroundColor: "theme-hover" },
+        _active: { backgroundColor: "theme-active" },
       },
       outline: {
-        backgroundColor: "var(--transparent-8)",
-        color: "var(--text-alternative)",
-        border: "0.0625rem solid var(--default-bg)",
+        color: "theme-text-alternative",
+        backgroundColor: "theme-transparent-8",
+        border: "0.0625rem solid",
+        borderColor: "theme-background",
 
-        _hover: { backgroundColor: "var(--transparent-16)" },
-        _focus: { backgroundColor: "var(--transparent-16)" },
-        _active: { backgroundColor: "var(--transparent-24)" },
+        _hover: { backgroundColor: "theme-transparent-16" },
+        _focus: { backgroundColor: "theme-transparent-16" },
+        _active: { backgroundColor: "theme-transparent-24" },
       },
       invisible: {
-        color: "var(--text)",
+        color: "theme-text",
         backgroundColor: "transparent",
-        border: "none",
 
         _hover: { backgroundColor: "gray-600-transparent-8" },
         _focus: { backgroundColor: "gray-600-transparent-8" },
         _active: {
-          color: "var(--text-alternative)",
+          color: "theme-text-alternative",
           backgroundColor: "gray-600-transparent-16",
         },
       },

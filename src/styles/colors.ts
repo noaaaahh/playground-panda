@@ -248,4 +248,17 @@ export const colors = defineTokens.colors({
   "text-normal": { value: "var(--text-normal)" },
   "text-alternative": { value: "var(--text-alternative)" },
   "text-exception": { value: "var(--text-exception)" },
+
+  // semantic tokens
+  // --colors-text, --colors-text-alternative, ...
+  "theme-text": { value: "var(--text)" },
+  "theme-text-alternative": { value: "var(--text-alternative)" },
+  "theme-transparent-8": { value: "var(--transparent-8)" },
+  "theme-transparent-16": { value: "var(--transparent-16)" },
+  "theme-transparent-24": { value: "var(--transparent-24)" },
+  "theme-transparent-32": { value: "var(--transparent-32)" },
+  "theme-hover": { value: "var(--hover)" },
+  "theme-active": { value: "var(--active)" },
+  "theme-foreground": { value: "var(--foreground)" },
+  "theme-background": { value: "var(--background)" },
 });
