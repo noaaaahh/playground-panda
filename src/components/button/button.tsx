@@ -9,17 +9,13 @@ interface ButtonProps
     PolymorphicProps,
     ButtonVariantProps {}
 
-export const Button = ({
-  color,
-  shape,
-  stretch,
-  size,
-  ...props
-}: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
+  const [variants, restProps] = button.splitVariantProps(props);
+
   return (
     <vapor.button
-      className={cx(button({ color, shape, size, stretch }))}
-      {...props}
+      className={cx(button(variants), restProps.className)}
+      {...restProps}
     />
   );
 };
