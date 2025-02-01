@@ -24,6 +24,19 @@
 
 @layer reset, base, tokens, recipes, utilities;
 
+/*
+ * pandacss의 기본 base style에 의해 `--contrast` 토큰이 무효화 되므로, 
+ * tokens 단계에서 이를 오버라이드 합니다. 
+ */
+@layer tokens {
+  *,
+  ::before,
+  ::after,
+  ::backdrop {
+    --contrast: rgb(62, 64, 76);
+  }
+}
+
 :root {
   /* origin root */
   --white: rgb(255, 255, 255);
@@ -201,7 +214,7 @@
   --success: rgb(4, 163, 126);
   --warning: rgb(237, 103, 12);
   --danger: rgb(245, 83, 94);
-  --contrastt: rgb(62, 64, 76);
+  --contrast: rgb(62, 64, 76);
   --hint: rgb(108, 110, 126);
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -581,7 +594,7 @@
   --success: rgb(4, 163, 126);
   --warning: rgb(237, 103, 12);
   --danger: rgb(245, 83, 94);
-  --contrastt: rgb(62, 64, 76);
+  --contrast: rgb(62, 64, 76);
   --hint: rgb(108, 110, 126);
   --primary-transparent-8: rgba(68, 142, 254, 0.08);
   --primary-transparent-16: rgba(68, 142, 254, 0.16);
@@ -603,10 +616,10 @@
   --danger-transparent-16: rgba(245, 83, 94, 0.16);
   --danger-transparent-24: rgba(245, 83, 94, 0.24);
   --danger-transparent-32: rgba(245, 83, 94, 0.32);
-  --contrastt-transparent-8: rgba(62, 64, 76, 0.08);
-  --contrastt-transparent-16: rgba(62, 64, 76, 0.16);
-  --contrastt-transparent-24: rgba(62, 64, 76, 0.24);
-  --contrastt-transparent-32: rgba(62, 64, 76, 0.32);
+  --contrast-transparent-8: rgba(62, 64, 76, 0.08);
+  --contrast-transparent-16: rgba(62, 64, 76, 0.16);
+  --contrast-transparent-24: rgba(62, 64, 76, 0.24);
+  --contrast-transparent-32: rgba(62, 64, 76, 0.32);
   --hint-transparent-8: rgba(108, 110, 126, 0.08);
   --hint-transparent-16: rgba(108, 110, 126, 0.16);
   --hint-transparent-24: rgba(108, 110, 126, 0.24);
@@ -621,8 +634,8 @@
   --warning-active: rgb(180, 82, 9);
   --danger-hover: rgb(236, 50, 62);
   --danger-active: rgb(217, 28, 41);
-  --contrastt-hover: rgb(43, 45, 54);
-  --contrastt-active: rgb(37, 39, 48);
+  --contrast-hover: rgb(43, 45, 54);
+  --contrast-active: rgb(37, 39, 48);
   --hint-hover: rgb(82, 84, 99);
   --hint-active: rgb(62, 64, 76);
   --text-primary: rgb(29, 108, 224);
@@ -635,8 +648,8 @@
   --text-warning-alternative: rgb(151, 71, 7);
   --text-danger: rgb(217, 28, 41);
   --text-danger-alternative: rgb(174, 30, 39);
-  --text-contrastt: rgb(62, 64, 76);
-  --text-contrastt-alternative: rgb(43, 45, 54);
+  --text-contrast: rgb(62, 64, 76);
+  --text-contrast-alternative: rgb(43, 45, 54);
   --text-hint: rgb(108, 110, 126);
   --text-hint-alternative: rgb(82, 84, 99);
   --text-light: rgb(255, 255, 255);
