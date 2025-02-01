@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Do not replace with '@zag-js/react'
 
-import type React from "react";
 import {
   Children,
+  ComponentPropsWithRef,
   type ComponentPropsWithoutRef,
+  ElementType,
+  ForwardRefExoticComponent,
   type JSX,
+  ReactElement,
+  ReactNode,
+  Ref,
   cloneElement,
   createElement,
   forwardRef,
@@ -25,13 +30,13 @@ export interface PolymorphicProps {
 type JsxElements = {
   [E in keyof JSX.IntrinsicElements]: VaporForwardRefComponent<E>;
 };
-type VaporForwardRefComponent<E extends React.ElementType> =
-  React.ForwardRefExoticComponent<VaporPropsWithRef<E>>;
-type VaporPropsWithRef<E extends React.ElementType> =
-  React.ComponentPropsWithRef<E> & PolymorphicProps;
+type VaporForwardRefComponent<E extends ElementType> =
+  ForwardRefExoticComponent<VaporPropsWithRef<E>>;
+type VaporPropsWithRef<E extends ElementType> = ComponentPropsWithRef<E> &
+  PolymorphicProps;
 
 // Credits to the Radix team
-function getRef(element: React.ReactElement) {
+function getRef(element: ReactElement) {
   // React <=18 in DEV
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -44,16 +49,14 @@ function getRef(element: React.ReactElement) {
   getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
   mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
   if (mayWarn) {
-    return (element.props as { ref?: React.Ref<unknown> }).ref;
+    return (element.props as { ref?: Ref<unknown> }).ref;
   }
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  return (
-    (element.props as { ref?: React.Ref<unknown> }).ref || (element as any).ref
-  );
+  return (element.props as { ref?: Ref<unknown> }).ref || (element as any).ref;
 }
 
-const withAsChild = (Component: React.ElementType) => {
+const withAsChild = (Component: ElementType) => {
   const Comp = memo(
     forwardRef<unknown, VaporPropsWithRef<typeof Component>>((props, ref) => {
       const { asChild, children, ...restProps } = props;
@@ -62,7 +65,7 @@ const withAsChild = (Component: React.ElementType) => {
         return createElement(Component, { ...restProps, ref }, children);
       }
 
-      const onlyChild: React.ReactNode = Children.only(children);
+      const onlyChild: ReactNode = Children.only(children);
 
       if (!isValidElement<Record<string, unknown>>(onlyChild)) {
         return null;
@@ -96,7 +99,7 @@ export const jsxFactory = () => {
       return withAsChild(argArray[0]);
     },
     get(_, element) {
-      const asElement = element as React.ElementType;
+      const asElement = element as ElementType;
       if (!cache.has(asElement)) {
         cache.set(asElement, withAsChild(asElement));
       }
