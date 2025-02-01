@@ -1,6 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
-import { buttonRecipe } from "./src/components/button/button.recipe";
 import * as tokens from "./src/styles";
+
+import * as recipes from "./src/components/recipes";
 
 export default defineConfig({
   // Whether to use css reset
@@ -20,10 +21,10 @@ export default defineConfig({
       tokens: { ...tokens },
       textStyles: tokens.textStyles,
     },
-    recipes: {
-      button: buttonRecipe,
-    },
+    recipes,
   },
+
+  outExtension: "js",
 
   staticCss: {
     recipes: "*",

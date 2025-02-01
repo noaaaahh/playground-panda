@@ -34,6 +34,9 @@ export default tseslint.config(
       "@pandacss/no-debug": "error",
       ...panda.configs.recommended.rules,
       "@pandacss/no-config-function-in-source": "off",
+
+      // typescripts
+      "@typescript-eslint/no-empty-object-type": "off",
     },
   }
 );
