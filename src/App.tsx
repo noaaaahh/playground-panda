@@ -1,4 +1,5 @@
 import { Button } from "~/components/button";
+import { Dialog } from "./components/dialog";
 
 function App() {
   return (
@@ -58,6 +59,24 @@ function App() {
       <Button asChild>
         <a href="https://soynoah.me">hi</a>
       </Button>
+
+      <Dialog>
+        <Dialog.Trigger>open</Dialog.Trigger>
+
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Booking info</Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <Dialog.Description>
+              Please enter the info for your booking below.
+            </Dialog.Description>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Dialog.Close>close</Dialog.Close>
+          </Dialog.Footer>
+        </Dialog.Content>
+      </Dialog>
     </>
   );
 }
