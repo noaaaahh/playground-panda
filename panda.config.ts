@@ -26,11 +26,6 @@ export default defineConfig({
   },
 
   staticCss: {
-    css: [
-      {
-        properties: {},
-      },
-    ],
     recipes: "*",
   },
 
