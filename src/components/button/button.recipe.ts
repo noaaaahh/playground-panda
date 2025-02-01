@@ -13,7 +13,7 @@ export const buttonRecipe = defineRecipe({
 
     _disabled: {
       pointerEvents: "none",
-      opacity: 0.32,
+      opacity: "disabled",
     },
   },
   defaultVariants: {
@@ -55,7 +55,7 @@ export const buttonRecipe = defineRecipe({
         borderColor: "themes.color",
 
         _hover: { backgroundColor: "themes.transparent-16" },
-        _focus: { backgroundColor: "themes.transparent-16" },
+        _focusVisible: { backgroundColor: "themes.transparent-16" },
         _active: { backgroundColor: "themes.transparent-24" },
       },
       invisible: {
@@ -63,7 +63,7 @@ export const buttonRecipe = defineRecipe({
         backgroundColor: "transparent",
 
         _hover: { backgroundColor: "gray-600-transparent-8" },
-        _focus: { backgroundColor: "gray-600-transparent-8" },
+        _focusVisible: { backgroundColor: "gray-600-transparent-8" },
         _active: {
           color: "themes.text-alternative",
           backgroundColor: "gray-600-transparent-16",
