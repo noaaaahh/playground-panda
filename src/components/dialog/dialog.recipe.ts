@@ -74,6 +74,9 @@ export const dialogRecipe = defineSlotRecipe({
       px: "300",
     },
   },
+  defaultVariants: {
+    size: "md",
+  },
   variants: {
     size: {
       md: { content: { w: "31.25rem" } },
