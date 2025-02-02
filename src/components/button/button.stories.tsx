@@ -8,5 +8,6 @@ export default { title: "Button", argTypes: getArgumentTypes(button) };
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
+  args: button.getVariantProps(),
   render: (args) => <Button {...args}>버튼</Button>,
 };
