@@ -3,13 +3,19 @@ import path from "node:path";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import storybook from "eslint-plugin-storybook";
 import tseslint from "typescript-eslint";
 import panda from "@pandacss/eslint-plugin";
 
 export default tseslint.config(
   { ignores: ["dist", "**/*.d.ts", "styled-system", "node_modules"] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      // "plugin:storybook/recommended",
+      ...storybook.recommended,
+    ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
