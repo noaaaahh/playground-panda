@@ -11,9 +11,7 @@ const { withRootProvider, withContext } = createStyleContext(dialog);
  * Dialog.Root
  ************************************************************************************/
 
-export interface RootProps extends Radix.DialogProps {
-  size?: "md" | "lg" | "xl";
-}
+export interface RootProps extends Radix.DialogProps, DialogVariantProps {}
 const Root = withRootProvider<Assign<RootProps, DialogVariantProps>>(
   Radix.Dialog
 );
