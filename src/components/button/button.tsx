@@ -1,21 +1,24 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentProps } from "react";
 
-import { cx } from "~/styled-system/css";
-import { ButtonVariantProps, button } from "~/styled-system/recipes";
-import { PolymorphicProps, vapor } from "~/utils/factory";
+import { styled } from "~/styled-system/jsx";
+import { button } from "~/styled-system/recipes";
+import { vapor } from "~/utils/factory";
 
-interface ButtonProps
-  extends Omit<ComponentPropsWithoutRef<"button">, "color">,
-    PolymorphicProps,
-    ButtonVariantProps {}
+export interface ButtonProps extends ComponentProps<"button"> {}
+export const Button = styled(vapor.button, button);
 
-export const Button = (props: ButtonProps) => {
-  const [variants, restProps] = button.splitVariantProps(props);
+// interface ButtonProps
+//   extends Omit<ComponentProps<"button">, "color">,
+//     PolymorphicProps,
+//     ButtonVariantProps {}
 
-  return (
-    <vapor.button
-      className={cx(button(variants), restProps.className)}
-      {...restProps}
-    />
-  );
-};
+// export const Button = (props: ButtonProps) => {
+//   const [variants, restProps] = button.splitVariantProps(props);
+
+//   return (
+//     <vapor.button
+//       className={cx(button(variants), restProps.className)}
+//       {...restProps}
+//     />
+//   );
+// };

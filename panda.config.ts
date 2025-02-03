@@ -31,10 +31,10 @@ export default defineConfig({
   },
 
   jsxFramework: "react",
+  jsxStyleProps: "none",
 
   // styled-system/jsx의 styled가 사라지는 문제로 인해 사용 X
   // jsxFactory: 'vapor',
-  // jsxStyleProps: "none",
 
   // The output directory for your css system
   outdir: "src/styled-system",
