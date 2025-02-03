@@ -1,7 +1,6 @@
-import { ComponentProps } from "react";
-
 import { styled } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
+import { ComponentProps } from "~/styled-system/types";
 import { vapor } from "~/utils/factory";
 
 export interface ButtonProps extends ComponentProps<"button"> {}
