@@ -1,7 +1,7 @@
 import { styled } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 import { ComponentProps } from "~/styled-system/types";
-import { vapor } from "~/utils/factory";
+import { vapor } from "~/libs/factory";
 
 export interface ButtonProps extends ComponentProps<"button"> {}
 export const Button = styled(vapor.button, button);

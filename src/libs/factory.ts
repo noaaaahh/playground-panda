@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Do not replace with '@zag-js/react'
 
 import {
   Children,

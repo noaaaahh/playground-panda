@@ -1,37 +1,29 @@
 import * as Radix from "@radix-ui/react-dialog";
-import { vapor } from "~/utils/factory";
+import { vapor } from "~/libs/factory";
 import { ComponentProps } from "react";
 import { dialog, DialogVariantProps } from "~/styled-system/recipes";
-import { createStyleContext } from "~/utils/create-style-context";
+import { createStyleContext } from "~/libs/create-style-context";
 import { Assign } from "~/styled-system/types";
 
 const { withRootProvider, withContext } = createStyleContext(dialog);
 
-/************************************************************************************
- * Dialog.Root
- ************************************************************************************/
-
+// Dialog.Root
 export interface RootProps extends Radix.DialogProps, DialogVariantProps {}
 const Root = withRootProvider<Assign<RootProps, DialogVariantProps>>(
   Radix.Dialog
 );
 
-/************************************************************************************
- * Dialog.Overlay
- ************************************************************************************/
-
+// Dialog.Overlay
 const Overlay = withContext<HTMLDivElement, Radix.DialogOverlayProps>(
   Radix.DialogOverlay,
   "overlay"
 );
 
-/************************************************************************************
- * Dialog.Content
- ************************************************************************************/
-
+// Dialog.Content
 interface ContentProps extends Radix.DialogContentProps {}
-
 const Content = withContext<HTMLDivElement, ContentProps>((props) => {
+  console.log("hi");
+
   return (
     <Radix.DialogPortal>
       <Overlay />
@@ -40,64 +32,43 @@ const Content = withContext<HTMLDivElement, ContentProps>((props) => {
   );
 }, "content");
 
-/************************************************************************************
- * Dialog.Title
- ************************************************************************************/
-
+// Dialog.Title
 const Title = withContext<HTMLDivElement, Radix.DialogTitleProps>(
   Radix.DialogTitle,
   "title"
 );
 
-/************************************************************************************
- * Dialog.Description
- ************************************************************************************/
-
+// Dialog.Description
 const Description = withContext<HTMLDivElement, Radix.DialogDescriptionProps>(
   Radix.DialogDescription,
   "description"
 );
 
-/************************************************************************************
- * Dialog.Trigger
- ************************************************************************************/
-
+// Dialog.Trigger
 const Trigger = withContext<HTMLButtonElement, Radix.DialogTriggerProps>(
   Radix.DialogTrigger,
   "trigger"
 );
 
-/************************************************************************************
- * Dialog.Close
- ************************************************************************************/
-
+// Dialog.Close
 const Close = withContext<HTMLButtonElement, Radix.DialogCloseProps>(
   Radix.DialogClose,
   "close"
 );
 
-/************************************************************************************
- * Dialog.Header
- ************************************************************************************/
-
+// Dialog.Header
 const Header = withContext<HTMLDivElement, ComponentProps<typeof vapor.div>>(
   vapor.div,
   "header"
 );
 
-/************************************************************************************
- * Dialog.Body
- ************************************************************************************/
-
+// Dialog.Body
 const Body = withContext<HTMLDivElement, ComponentProps<typeof vapor.div>>(
   vapor.div,
   "body"
 );
 
-/************************************************************************************
- * Dialog.Footer
- ************************************************************************************/
-
+// Dialog.Footer
 const Footer = withContext<HTMLDivElement, ComponentProps<typeof vapor.div>>(
   vapor.div,
   "footer"
