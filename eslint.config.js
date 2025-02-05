@@ -27,7 +27,7 @@ export default tseslint.config(
       "@pandacss": panda,
     },
     settings: {
-      "@pandacss/configPath": path.join("./panda.config.ts"),
+      "@pandacss/configPath": path.join("./panda.config.js"),
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
