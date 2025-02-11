@@ -7,7 +7,7 @@ export const buttonRecipe = defineRecipe({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "border-radius-300",
+    borderRadius: "300",
     border: "none",
     cursor: "pointer",
 
@@ -24,10 +24,10 @@ export const buttonRecipe = defineRecipe({
   },
   variants: {
     size: {
-      sm: { gap: "050", h: "dimension-300", px: "050", textStyle: "subtitle1" },
-      md: { gap: "075", h: "dimension-400", px: "150", textStyle: "subtitle1" },
-      lg: { gap: "100", h: "dimension-500", px: "200", textStyle: "subtitle1" },
-      xl: { gap: "100", h: "dimension-600", px: "300", textStyle: "heading6" },
+      sm: { gap: "050", h: "300", px: "050", textStyle: "subtitle1" },
+      md: { gap: "075", h: "400", px: "150", textStyle: "subtitle1" },
+      lg: { gap: "100", h: "500", px: "200", textStyle: "subtitle1" },
+      xl: { gap: "100", h: "600", px: "300", textStyle: "heading6" },
     },
     stretch: { true: { width: "100%" }, false: {} },
     color: {
