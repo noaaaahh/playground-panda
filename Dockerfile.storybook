@@ -1,0 +1,44 @@
+FROM mcr.microsoft.com/playwright:v1.50.1-noble
+
+WORKDIR /app
+
+RUN apt-get update
+RUN apt-get install -y xdg-utils # For Storybook
+
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+RUN npm install -g pnpm 
+RUN pnpm i
+
+COPY . .
+
+RUN npx -y playwright install --with-deps chromium webkit
+
+EXPOSE 6006
+
+CMD ["npx", "playwright", "test", "--config", "playwright.config.ts"]
+
+# CMD ["pnpm", "build-storybook", "--host", "0.0.0.0", "--preview-url=http://host.docker.internal:6006"]
+
+# FROM mcr.microsoft.com/playwright:v1.50.1-noble
+
+# WORKDIR /app
+
+# RUN apt-get update
+# RUN apt-get install -y xdg-utils # For Storybook
+
+# COPY package.json ./
+# COPY pnpm-lock.yaml ./
+# RUN npm install -g pnpm 
+# RUN pnpm i
+
+# COPY . .
+
+# RUN npx -y playwright install --with-deps chromium webkit
+
+# EXPOSE 6006
+
+# CMD ["pnpm", "run", "storybook"]
+# # CMD [ "npm", "run", "storybook" ]
+# # CMD ["npx", "playwright", "test"]
+# # ENTRYPOINT ["npx", "playwright"]

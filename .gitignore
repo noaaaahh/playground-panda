@@ -23,7 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
-## Panda
+# Panda
 styled-system
 styled-system-studio
 *storybook.log
+
+# Storybook
+storybook-static

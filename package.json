@@ -8,11 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "panda codegen",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --host 0.0.0.0",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@playwright/test": "^1.50.1",
     "@radix-ui/react-dialog": "^1.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
