@@ -46,7 +46,7 @@ jobs:
         run: pnpm build-storybook
 
       - name: Start Storybook
-        run: npx http-server storybook-static -p 6006
+        run: npx http-server storybook-static -p 6006 -s
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
