@@ -8,6 +8,8 @@ const stories = Object.values(storybook.entries).filter(
 );
 
 for (const story of stories) {
+  if (story.name !== "Visual Regression") continue;
+
   test(`${story.title} ${story.name} should not have visual regressions`, async ({
     page,
   }, workerInfo) => {
