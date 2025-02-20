@@ -42,6 +42,11 @@ jobs:
 
       - run: pnpm install
 
+      - name: Build Storybook
+        run: pnpm build-storybook
+
+      # - name:
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
