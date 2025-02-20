@@ -42,14 +42,14 @@ jobs:
 
       - run: pnpm install
 
-      - name: Build Storybook
-        run: pnpm build-storybook
-
-      - name: Start Storybook
-        run: npx http-server storybook-static -p 6006 -s
-
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
+      - name: Serve Storybook and run tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && yarn test-storybook"
 
       - name: Run Playwright tests
         run: npx playwright test
