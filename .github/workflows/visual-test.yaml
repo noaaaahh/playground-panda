@@ -13,11 +13,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: 18
           check-latest: true
+
       - name: Setup corepack
         run: |
           npm i -g corepack@0.31
@@ -42,17 +44,11 @@ jobs:
 
       - run: pnpm install
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Build Storybook
+        run: pnpm build-storybook
 
-      - name: Serve Storybook and run tests
-        run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:6006 && yarn test-storybook"
-
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Docker
+        run: docker run -it -p 6006:6006 -e TEST_BASE_URL='http://host.docker.internal:6006' -v ${PWD}/storybook-static:/app/sotrybook-static storybook
 
       # - run: pnpm run build
 
