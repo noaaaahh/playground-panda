@@ -11,6 +11,8 @@ on:
 jobs:
   interaction-and-accessibility:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.51.1-noble
     steps:
       - uses: actions/checkout@v4
 
@@ -45,10 +47,6 @@ jobs:
 
       - run: pnpm install
 
-      # install playwright deps
-      - name: Install Playwright
-        run: npx playwright install --with-deps chromium webkit
-
       # build storybook
       - name: Build Storybook
         run: pnpm build-storybook --quiet
@@ -57,4 +55,4 @@ jobs:
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:6006 && CI=true npx playwright test"
+            "npx wait-on tcp:6006 && DEBUG=pw:browser CI=true npx playwright test"
