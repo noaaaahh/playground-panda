@@ -42,7 +42,7 @@ export const buttonRecipe = defineRecipe({
     shape: {
       fill: {
         color: "themes.foreground",
-        backgroundColor: "themes.color",
+        backgroundColor: "blue-200",
 
         _hover: { backgroundColor: "themes.hover" },
         _focusVisible: { backgroundColor: "themes.hover" },

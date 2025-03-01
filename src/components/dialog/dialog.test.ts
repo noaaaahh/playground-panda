@@ -1,20 +1,39 @@
-// import { test, expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
-// test("dialog", async ({ page }, workerInfo) => {
-//   // await page.goto("http://localhost:6006");
-//   // await expect(page).toHaveScreenshot("homepage.png");
+import storybook from "../../../storybook-static/index.json" with { type: "json" };
 
-//   const params = new URLSearchParams({
-//     id: "dialog--visual-regression",
-//     viewMode: "story",
-//   });
+const story = Object.values(storybook.entries).find(
+  (e) => e.id === "dialog--visual-regression"
+);
 
-//   await page.goto(`http://localhost:6006/iframe.html?${params.toString()}`);
-//   await page.waitForSelector("#storybook-root");
-//   await page.waitForLoadState("networkidle");
+test("dialog", async ({ page }, workerInfo) => {
+  if (story) {
+    const params = new URLSearchParams({
+      id: story.id,
+      viewMode: "story",
+    });
 
-//   await expect(page).toHaveScreenshot(
-//     `dialog--visual-regression-${workerInfo.project.name}-${process.platform}.png`,
-//     { fullPage: true, animations: "disabled" }
-//   );
+    await page.goto(`/iframe.html?${params.toString()}`);
+    await page.waitForSelector("#storybook-root");
+    await page.waitForLoadState("networkidle");
+
+    await expect(page).toHaveScreenshot(
+      `${story.id}-${workerInfo.project.name}-${process.platform}.png`,
+      { fullPage: true, animations: "disabled" }
+    );
+  }
+});
+
+// const params = new URLSearchParams({
+//   id: "dialog--visual-regression",
+//   viewMode: "story",
 // });
+
+// await page.goto(`http://localhost:6006/iframe.html?${params.toString()}`);
+// await page.waitForSelector("#storybook-root");
+// await page.waitForLoadState("networkidle");
+
+// await expect(page).toHaveScreenshot(
+//   `dialog--visual-regression-${workerInfo.project.name}-${process.platform}.png`,
+//   { fullPage: true, animations: "disabled" }
+// );
