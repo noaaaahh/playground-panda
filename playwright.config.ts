@@ -14,11 +14,11 @@ export default defineConfig({
   use: { baseURL: BASE_URL },
   projects: [{ name: "desktop", use: { ...devices["Desktop Chrome"] } }],
 
-  // webServer: process.env.CI
-  //   ? undefined
-  //   : {
-  //       command: "npm run storybook",
-  //       url: BASE_URL,
-  //       reuseExistingServer: true,
-  //     },
+  webServer: process.env.CI
+    ? undefined
+    : {
+        command: "npm run storybook",
+        url: BASE_URL,
+        reuseExistingServer: true,
+      },
 });

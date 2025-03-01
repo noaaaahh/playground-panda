@@ -44,11 +44,14 @@ jobs:
 
       - run: pnpm install
 
-      - name: Build Storybook
-        run: pnpm build-storybook
+      - name: Run Playwright
+        run: npx playwright test
 
-      - name: Run Docker
-        run: docker run -it -p 6006:6006 -e TEST_BASE_URL='http://host.docker.internal:6006' -v ${PWD}/storybook-static:/app/sotrybook-static storybook
+      # - name: Build Storybook
+      #   run: pnpm build-storybook
+
+      # - name: Run Docker
+      #   run: docker run -it -p 6006:6006 -e TEST_BASE_URL='http://host.docker.internal:6006' -v ${PWD}/storybook-static:/app/sotrybook-static storybook
 
       # - run: pnpm run build
 
