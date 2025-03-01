@@ -44,6 +44,8 @@ jobs:
 
       - run: pnpm install
 
+      - run: npx playwright install
+
       - name: Run Playwright
         run: npx playwright test
 
