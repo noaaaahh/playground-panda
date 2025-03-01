@@ -62,7 +62,6 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
 
   deploy-report:
     needs: visual-regression
@@ -70,4 +69,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: aws s3 cp './playwright-report s3://${{ secrets.AWS_BUCKET }} --recursive'
+      - run: aws s3 cp './playwright-report' s3://${{ secrets.AWS_BUCKET }} --recursive
