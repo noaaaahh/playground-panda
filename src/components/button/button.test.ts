@@ -11,7 +11,7 @@ test("button", async ({ page }, workerInfo) => {
   await page.waitForLoadState("networkidle");
 
   await expect(page).toHaveScreenshot(
-    `button--visual-regression-${workerInfo.project.name}-${process.platform}.png`,
+    `button--visual-regression-${workerInfo.project.name}.png`,
     { fullPage: true, animations: "disabled" }
   );
 });

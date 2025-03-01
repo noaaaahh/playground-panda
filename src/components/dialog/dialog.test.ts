@@ -11,7 +11,7 @@ test("dialog", async ({ page }, workerInfo) => {
   await page.waitForLoadState("networkidle");
 
   await expect(page).toHaveScreenshot(
-    `dialog--visual-regression-${workerInfo.project.name}-${process.platform}.png`,
+    `dialog--visual-regression-${workerInfo.project.name}.png`,
     { animations: "disabled" }
   );
 });
