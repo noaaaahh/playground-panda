@@ -10,7 +10,7 @@ export default defineConfig({
   // testDir: "./src/components/**/*.test.*",
 
   // ...
-  reporter: [["html", { outputFile: "./tests/report" }]],
+  reporter: [["html", { outputFolder: "./tests/report" }]],
   use: { baseURL: BASE_URL },
   projects: [{ name: "desktop", use: { ...devices["Desktop Chrome"] } }],
 
