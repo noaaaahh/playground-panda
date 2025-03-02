@@ -60,7 +60,7 @@ function App() {
         <a href="https://soynoah.me">hi</a>
       </Button>
 
-      <Dialog.Root>
+      <Dialog>
         <Dialog.Trigger>open</Dialog.Trigger>
 
         <Dialog.Content>
@@ -76,7 +76,7 @@ function App() {
             <Dialog.Close>close</Dialog.Close>
           </Dialog.Footer>
         </Dialog.Content>
-      </Dialog.Root>
+      </Dialog>
     </>
   );
 }

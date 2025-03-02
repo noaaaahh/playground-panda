@@ -1,2 +1,3 @@
-export { Button } from "./button";
-export { Dialog } from "./dialog";
+export * from "./button";
+export * from "./dialog";
+export * from "./tabs";

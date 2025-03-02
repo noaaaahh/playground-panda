@@ -1,3 +1,5 @@
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import path from "path";
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
@@ -22,6 +24,22 @@ const config: StorybookConfig = {
     },
   },
 
+  previewHead: (head) => `
+    ${head}
+    ${'<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />'}
+  `,
+
+  // viteFinal: async (config) => ({
+  //   ...config,
+  //   plugins: [config.plugins, vanillaExtractPlugin()],
+  //   resolve: {
+  //     ...config.resolve,
+  //     alias: {
+  //       ...config.resolve?.alias,
+  //       "~": path.resolve(__dirname, "../packages/vanilla-extract/src"),
+  //     },
+  //   },
+  // }),
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
 
