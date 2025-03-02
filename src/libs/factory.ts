@@ -1,15 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import {
-  Children,
+import type {
   ComponentPropsWithRef,
-  type ComponentPropsWithoutRef,
   ElementType,
   ForwardRefExoticComponent,
-  type JSX,
   ReactElement,
   ReactNode,
   Ref,
+} from "react";
+import {
+  Children,
+  type ComponentPropsWithoutRef,
+  type JSX,
   cloneElement,
   createElement,
   forwardRef,

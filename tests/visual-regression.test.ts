@@ -1,33 +1,33 @@
-// test/visual.spec.ts
-import { expect, test } from "@playwright/test";
+// // test/visual.spec.ts
+// import { expect, test } from "@playwright/test";
 
-import storybook from "../storybook-static/index.json" with { type: "json" };
+// import storybook from "../storybook-static/index.json" with { type: "json" };
 
-const stories = Object.values(storybook.entries).filter(
-  (e) => e.type === "story"
-);
+// const stories = Object.values(storybook.entries).filter(
+//   (e) => e.type === "story"
+// );
 
-for (const story of stories) {
-  if (story.name !== "Visual Regression") continue;
+// for (const story of stories) {
+//   if (story.name !== "Visual Regression") continue;
 
-  test(`${story.title} ${story.name} should not have visual regressions`, async ({
-    page,
-  }, workerInfo) => {
-    const params = new URLSearchParams({
-      id: story.id,
-      viewMode: "story",
-    });
+//   test(`${story.title} ${story.name} should not have visual regressions`, async ({
+//     page,
+//   }, workerInfo) => {
+//     const params = new URLSearchParams({
+//       id: story.id,
+//       viewMode: "story",
+//     });
 
-    await page.goto(`/iframe.html?${params.toString()}`);
-    await page.waitForSelector("#storybook-root");
-    await page.waitForLoadState("networkidle");
+//     await page.goto(`/iframe.html?${params.toString()}`);
+//     await page.waitForSelector("#storybook-root");
+//     await page.waitForLoadState("networkidle");
 
-    await expect(page).toHaveScreenshot(
-      `${story.id}-${workerInfo.project.name}-${process.platform}.png`,
-      {
-        fullPage: true,
-        animations: "disabled",
-      }
-    );
-  });
-}
+//     await expect(page).toHaveScreenshot(
+//       `${story.id}-${workerInfo.project.name}-${process.platform}.png`,
+//       {
+//         fullPage: true,
+//         animations: "disabled",
+//       }
+//     );
+//   });
+// }

@@ -1,194 +1,142 @@
 import * as Radix from "@radix-ui/react-dialog";
+import type { ComponentPropsWithoutRef } from "react";
 import { vapor } from "~/libs/factory";
-import { ComponentProps } from "react";
-import { dialog, DialogVariantProps } from "~/styled-system/recipes";
-import { createStyleContext } from "~/libs/create-style-context";
-import { Assign } from "~/styled-system/types";
+import { createContext } from "~/libs/create-context";
 
-const { withRootProvider, withContext } = createStyleContext(dialog);
+import * as styles from "./dialog.css";
+import clsx from "clsx";
 
-// Dialog.Root
-export interface RootProps extends Radix.DialogProps, DialogVariantProps {}
-const Root = withRootProvider<Assign<RootProps, DialogVariantProps>>(
-  Radix.Dialog
-);
+type DialogContextType = { size: "md" | "lg" | "xl" };
 
-// Dialog.Overlay
-const Overlay = withContext<HTMLDivElement, Radix.DialogOverlayProps>(
-  Radix.DialogOverlay,
-  "overlay"
-);
+const [DialogRoot, useDialog] = createContext<DialogContextType>({
+  name: "Dialog",
+  hookName: "useDialogContext",
+  providerName: "DialogProvider",
+});
 
-// Dialog.Content
-interface ContentProps extends Radix.DialogContentProps {}
-const Content = withContext<HTMLDivElement, ContentProps>((props) => {
-  console.log("hi");
+/******************************************************************************/
 
+interface DialogProps extends Radix.DialogProps, Partial<DialogContextType> {}
+
+export const Dialog = ({ size = "md", children, ...props }: DialogProps) => {
+  return (
+    <Radix.Dialog {...props}>
+      <DialogRoot value={{ size }}>{children}</DialogRoot>
+    </Radix.Dialog>
+  );
+};
+
+/******************************************************************************/
+
+interface OverlayProps extends ComponentPropsWithoutRef<typeof Radix.Overlay> {}
+
+const Overlay = ({ className, ...props }: OverlayProps) => {
+  return (
+    <Radix.Overlay className={clsx(styles.overlay, className)} {...props} />
+  );
+};
+
+/******************************************************************************/
+
+interface CombinedContentProps
+  extends ComponentPropsWithoutRef<typeof Radix.Content> {}
+
+const CombinedContent = (props: CombinedContentProps) => {
   return (
     <Radix.DialogPortal>
       <Overlay />
-      <Radix.DialogContent {...props} />
+      <Content {...props} />
     </Radix.DialogPortal>
   );
-}, "content");
-
-// Dialog.Title
-const Title = withContext<HTMLDivElement, Radix.DialogTitleProps>(
-  Radix.DialogTitle,
-  "title"
-);
-
-// Dialog.Description
-const Description = withContext<HTMLDivElement, Radix.DialogDescriptionProps>(
-  Radix.DialogDescription,
-  "description"
-);
-
-// Dialog.Trigger
-const Trigger = withContext<HTMLButtonElement, Radix.DialogTriggerProps>(
-  Radix.DialogTrigger,
-  "trigger"
-);
-
-// Dialog.Close
-const Close = withContext<HTMLButtonElement, Radix.DialogCloseProps>(
-  Radix.DialogClose,
-  "close"
-);
-
-// Dialog.Header
-const Header = withContext<HTMLDivElement, ComponentProps<typeof vapor.div>>(
-  vapor.div,
-  "header"
-);
-
-// Dialog.Body
-const Body = withContext<HTMLDivElement, ComponentProps<typeof vapor.div>>(
-  vapor.div,
-  "body"
-);
-
-// Dialog.Footer
-const Footer = withContext<HTMLDivElement, ComponentProps<typeof vapor.div>>(
-  vapor.div,
-  "footer"
-);
-
-export const Dialog = {
-  Root: Root,
-  Trigger: Trigger,
-  Content: Content,
-  Header: Header,
-  Body: Body,
-  Footer: Footer,
-  Title: Title,
-  Description: Description,
-  Close: Close,
 };
 
-// /************************************************************************************
-//  * Dialog
-//  ************************************************************************************/
-// const styles = dialog();
+/******************************************************************************/
 
-// interface DialogProps extends Radix.DialogProps {
-//   size?: "md" | "lg" | "xl";
-// }
+interface ContentProps extends ComponentPropsWithoutRef<typeof Radix.Content> {}
 
-// export const Dialog = (props: DialogProps) => {
-//   return <Radix.Dialog {...props} />;
-// };
+const Content = ({ className, ...props }: ContentProps) => {
+  const { size } = useDialog();
 
-// /************************************************************************************
-//  * DialogContent
-//  ************************************************************************************/
+  return (
+    <Radix.Content
+      className={clsx(styles.content, styles.sizes[size], className)}
+      {...props}
+    />
+  );
+};
 
-// interface ContentProps extends Radix.DialogContentProps {}
+/******************************************************************************/
 
-// const Content = (props: ContentProps) => {
-//   return (
-//     <Radix.DialogPortal>
-//       <Radix.DialogOverlay className={styles.overlay} />
-//       <Radix.DialogContent className={styles.content} {...props} />
-//     </Radix.DialogPortal>
-//   );
-// };
+interface TriggerProps extends Radix.DialogTriggerProps {}
 
-// /************************************************************************************
-//  * DialogTrigger
-//  ************************************************************************************/
+const Trigger = (props: TriggerProps) => {
+  return <Radix.DialogTrigger {...props} />;
+};
 
-// interface TriggerProps extends Radix.DialogTriggerProps {}
+/******************************************************************************/
 
-// const Trigger = (props: TriggerProps) => {
-//   return <Radix.DialogTrigger {...props} />;
-// };
+interface TitleProps extends ComponentPropsWithoutRef<typeof Radix.Title> {}
 
-// /************************************************************************************
-//  * DialogTitle
-//  ************************************************************************************/
+const Title = ({ className, ...props }: TitleProps) => {
+  return <Radix.Title className={clsx(styles.title, className)} {...props} />;
+};
 
-// interface TitleProps extends Radix.DialogTitleProps {}
+/******************************************************************************/
 
-// const Title = (props: TitleProps) => {
-//   return <Radix.DialogTitle className={styles.title} {...props} />;
-// };
+interface CloseProps extends Radix.DialogCloseProps {}
 
-// /************************************************************************************
-//  * DialogClose
-//  ************************************************************************************/
+const Close = (props: CloseProps) => {
+  return <Radix.DialogClose {...props} />;
+};
 
-// interface CloseProps extends Radix.DialogCloseProps {}
+/******************************************************************************/
 
-// const Close = (props: CloseProps) => {
-//   return <Radix.DialogClose {...props} />;
-// };
+interface DescriptionProps
+  extends ComponentPropsWithoutRef<typeof Radix.Description> {}
 
-// /************************************************************************************
-//  * DialogDescription
-//  ************************************************************************************/
+const Description = ({ className, ...props }: DescriptionProps) => {
+  return (
+    <Radix.Description
+      className={clsx(styles.description, className)}
+      {...props}
+    />
+  );
+};
 
-// interface DescriptionProps extends Radix.DialogDescriptionProps {}
+/******************************************************************************/
 
-// const Description = (props: DescriptionProps) => {
-//   return <Radix.DialogDescription className={styles.description} {...props} />;
-// };
+interface HeaderProps extends ComponentPropsWithoutRef<typeof vapor.div> {}
 
-// /************************************************************************************
-//  * DialogHeader
-//  ************************************************************************************/
+const Header = ({ className, ...props }: HeaderProps) => {
+  return <vapor.div className={clsx(styles.header, className)} {...props} />;
+};
 
-// interface HeaderProps extends ComponentProps<typeof vapor.div> {}
+/******************************************************************************/
 
-// const Header = (props: HeaderProps) => {
-//   return <vapor.div className={styles.header} {...props} />;
-// };
+interface BodyProps extends ComponentPropsWithoutRef<typeof vapor.div> {}
 
-// /************************************************************************************
-//  * DialogBody
-//  ************************************************************************************/
+const Body = ({ className, ...props }: BodyProps) => {
+  return <vapor.div className={clsx(styles.body, className)} {...props} />;
+};
 
-// interface BodyProps extends ComponentProps<typeof vapor.div> {}
+/******************************************************************************/
 
-// const Body = (props: BodyProps) => {
-//   return <vapor.div className={styles.body} {...props} />;
-// };
+interface FooterProps extends ComponentPropsWithoutRef<typeof vapor.div> {}
 
-// /************************************************************************************
-//  * DialogFooter
-//  ************************************************************************************/
+const Footer = ({ className, ...props }: FooterProps) => {
+  return <vapor.div className={clsx(styles.footer, className)} {...props} />;
+};
 
-// interface FooterProps extends ComponentProps<typeof vapor.div> {}
+/******************************************************************************/
 
-// const Footer = (props: FooterProps) => {
-//   return <vapor.div className={styles.footer} {...props} />;
-// };
-
-// Dialog.Trigger = Trigger;
-// Dialog.Content = Content;
-// Dialog.Header = Header;
-// Dialog.Body = Body;
-// Dialog.Footer = Footer;
-// Dialog.Title = Title;
-// Dialog.Description = Description;
-// Dialog.Close = Close;
+Dialog.Portal = Radix.DialogPortal;
+Dialog.Trigger = Trigger;
+Dialog.Overlay = Overlay;
+Dialog.CombinedContent = CombinedContent;
+Dialog.Content = Content;
+Dialog.Header = Header;
+Dialog.Body = Body;
+Dialog.Footer = Footer;
+Dialog.Title = Title;
+Dialog.Description = Description;
+Dialog.Close = Close;
